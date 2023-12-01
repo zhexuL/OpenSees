@@ -82,6 +82,22 @@ void* OPS_Brick()
 	    return 0;
 	}	
     }
+    //option,Tang.S
+    int numData = 1;
+    while (OPS_GetNumRemainingInputArgs() > 0) {
+        std::string theType = OPS_GetString();
+        if (theType == "-damp") {
+
+            if (OPS_GetNumRemainingInputArgs() > 0) {
+                if (OPS_GetIntInput(&numData, &dampingTag) < 0) return 0;
+                theDamping = OPS_getDamping(dampingTag);
+                if (theDamping == 0) {
+                    opserr << "damping not found\n";
+                    return 0;
+                }
+            }
+        }
+    }
 
     return new Brick(idata[0],idata[1],idata[2],idata[3],idata[4],idata[5],idata[6],idata[7],
 		     idata[8],*mat,data[0],data[1],data[2]);

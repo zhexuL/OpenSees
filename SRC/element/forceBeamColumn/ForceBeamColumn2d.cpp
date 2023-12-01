@@ -146,6 +146,18 @@ void* OPS_ForceBeamColumn2d()
 		}
 	    }
 	}
+    //Tang.S
+    else if (strcmp(type, "-damp") == 0) {
+        
+        if (OPS_GetNumRemainingInputArgs() > 0) {
+            if (OPS_GetIntInput(&numData, &dampingTag) < 0) return 0;
+            theDamping = OPS_getDamping(dampingTag);
+            if (theDamping == 0) {
+                opserr << "damping not found\n";
+                return 0;
+            }
+        }
+    }
     }
 
     // check transf
@@ -263,6 +275,18 @@ void* OPS_ForceBeamColumn2d(const ID &info)
 		    }
 		}
 	    }
+        //Tang.S
+        else if (strcmp(type, "-damp") == 0) {
+
+            if (OPS_GetNumRemainingInputArgs() > 0) {
+                if (OPS_GetIntInput(&numData, &dampingTag) < 0) return 0;
+                theDamping = OPS_getDamping(dampingTag);
+                if (theDamping == 0) {
+                    opserr << "damping not found\n";
+                    return 0;
+                }
+            }
+        }
 	}
     }
 
@@ -379,6 +403,18 @@ int OPS_ForceBeamColumn2d(Domain& theDomain, const ID& elenodes, ID& eletags)
 		if(OPS_GetDoubleInput(&numData,&mass) < 0) return -1;
 	    }
 	}
+    //Tang.S
+    else if (strcmp(type, "-damp") == 0) {
+
+        if (OPS_GetNumRemainingInputArgs() > 0) {
+            if (OPS_GetIntInput(&numData, &dampingTag) < 0) return 0;
+            theDamping = OPS_getDamping(dampingTag);
+            if (theDamping == 0) {
+                opserr << "damping not found\n";
+                return 0;
+            }
+        }
+    }
     }
 
     // check transf

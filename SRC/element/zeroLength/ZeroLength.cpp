@@ -196,7 +196,39 @@ void* OPS_ZeroLength()
 	    }
 	  }
 
-	} else if (strcmp(type,"-orient") == 0) {
+	}
+    //written by ts
+    //else if (strcmp(type, "-damp") == 0) {
+    //    
+    //    if (OPS_GetNumRemainingInputArgs() > 0) {
+    //        numdata = 1;
+    //        if (OPS_GetIntInput(&numdata, &dampingTag) < 0) return 0;
+    //             theDamping = OPS_getDamping(dampingTag);
+    //        if (theDamping == 0) {
+    //            opserr << "damping not found\n";
+    //            return 0;
+    //        }
+    //        }
+    // }
+    //
+    //written by Tang.S
+    else if (strcmp(type, "-damp") == 0) {
+        if (OPS_GetNumRemainingInputArgs() > 0) {
+            numdata = 1;
+            if (OPS_GetIntInput(&numdata, &dampingTag) < 0) return 0;
+            if (dampingTag)
+            {
+                theDamping = OPS_getDamping(dampingTag);
+                if (theDamping == 0)
+                {
+                    opserr << "damping not found\n";
+                    return 0;
+                }
+            }
+        }
+    }
+
+    else if (strcmp(type,"-orient") == 0) {
 	    if (ndm == 2 && OPS_GetNumRemainingInputArgs() < 3) {
 	      opserr<<"WARNING zeroLength - insufficient orient values for 2D model" << endln;
 		return 0;
@@ -224,9 +256,10 @@ void* OPS_ZeroLength()
       y(2) = 0.0;
     }
     
+    //Add theDamping at the end,Tang.S
     Element *theEle = 0;
     if (doRayleighDamping != 2) 
-      theEle = new ZeroLength(idata[0], ndm, idata[1], idata[2], x, y, numMats, theMats, dirs, doRayleighDamping);
+      theEle = new ZeroLength(idata[0], ndm, idata[1], idata[2], x, y, numMats, theMats, dirs, doRayleighDamping, theDamping);
     else
       theEle = new ZeroLength(idata[0], ndm, idata[1], idata[2], x, y, numMats, theMats, theDampMats, dirs, doRayleighDamping);
 

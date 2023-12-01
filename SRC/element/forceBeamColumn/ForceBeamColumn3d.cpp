@@ -150,6 +150,18 @@ void* OPS_ForceBeamColumn3d()
 		}
 	    }
 	}
+    //Tang.S
+    else if (strcmp(type, "-damp") == 0) {
+
+        if (OPS_GetNumRemainingInputArgs() > 0) {
+            if (OPS_GetIntInput(&numData, &dampingTag) < 0) return 0;
+            theDamping = OPS_getDamping(dampingTag);
+            if (theDamping == 0) {
+                opserr << "damping not found\n";
+                return 0;
+            }
+        }
+    }
     }
 
     // check transf
@@ -259,6 +271,18 @@ void *OPS_ForceBeamColumn3d(const ID &info) {
                 if (OPS_GetNumRemainingInputArgs() > 0) {
                     if (OPS_GetDoubleInput(&numData, &mass) < 0) {
                         opserr << "WARNING invalid mass\n";
+                        return 0;
+                    }
+                }
+            }
+            //Tang.S
+            else if (strcmp(type, "-damp") == 0) {
+                
+                if (OPS_GetNumRemainingInputArgs() > 0) {
+                    if (OPS_GetIntInput(&numData, &dampingTag) < 0) return 0;
+                    theDamping = OPS_getDamping(dampingTag);
+                    if (theDamping == 0) {
+                        opserr << "damping not found\n";
                         return 0;
                     }
                 }
