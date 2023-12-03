@@ -61,7 +61,8 @@ Vector ZeroLength::ZeroLengthV12(12);
 void* OPS_ZeroLength()
 {
     int ndm = OPS_GetNDM();
-
+    int dampingTag = 0;
+    Damping* theDamping = 0;
     //
     // first scan the command line to obtain eleID, iNode, jNode, material ID's
     // and their directions, and the orientation of ele xPrime and yPrime not

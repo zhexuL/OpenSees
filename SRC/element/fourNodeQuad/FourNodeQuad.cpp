@@ -47,6 +47,9 @@
 
 void* OPS_FourNodeQuad()
 {
+    int dampingTag = 0;
+    Damping* theDamping = 0;
+
     int ndm = OPS_GetNDM();
     int ndf = OPS_GetNDF();
 
@@ -132,6 +135,9 @@ void *OPS_FourNodeQuad(const ID &info) {
         opserr << "WARNING: info is empty -- FourNodeQuad\n";
         return 0;
     }
+
+    int dampingTag = 0;
+    Damping* theDamping = 0;
 
     int ndm = OPS_GetNDM();
     int ndf = OPS_GetNDF();

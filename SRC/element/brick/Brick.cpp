@@ -51,6 +51,9 @@
 
 void* OPS_Brick()
 {
+    int dampingTag = 0;
+    Damping* theDamping = 0;
+
     if (OPS_GetNumRemainingInputArgs() < 10) {
 	opserr << "WARNING insufficient arguments\n";
 	opserr << "Want: element Brick eleTag? Node1? Node2? Node3? Node4? Node5? Node6? Node7? Node 8? matTag?\n";
@@ -100,7 +103,7 @@ void* OPS_Brick()
     }
 
     return new Brick(idata[0],idata[1],idata[2],idata[3],idata[4],idata[5],idata[6],idata[7],
-		     idata[8],*mat,data[0],data[1],data[2]);
+		     idata[8],*mat,data[0],data[1],data[2], theDamping);
 }
 
 //static data

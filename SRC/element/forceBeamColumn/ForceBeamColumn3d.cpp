@@ -94,6 +94,9 @@ Vector ForceBeamColumn3d::SsrSubdivide[maxNumSections];
 
 void* OPS_ForceBeamColumn3d()
 {
+    int dampingTag = 0;
+    Damping* theDamping = 0;
+
     if (OPS_GetNumRemainingInputArgs() < 5) {
 	opserr<<"insufficient arguments:eleTag,iNode,jNode,transfTag,integrationTag\n";
 	return 0;
@@ -195,7 +198,7 @@ void* OPS_ForceBeamColumn3d()
     }
 
     Element *theEle =  new ForceBeamColumn3d(iData[0],iData[1],iData[2],secTags.Size(),sections,
-					     *bi,*theTransf,mass,maxIter,tol,numSub,subFac);
+					     *bi,*theTransf,mass,maxIter,tol,numSub,subFac,theDamping);
     delete [] sections;
     return theEle;
 }
@@ -206,6 +209,9 @@ void *OPS_ForceBeamColumn3d(const ID &info) {
     double mass = 0.0, tol = 1e-12, subFac=10.0;
     int maxIter = 10, numSub = 4;
     int numData;
+
+    int dampingTag = 0;
+    Damping* theDamping = 0;
 
     int ndm = OPS_GetNDM();
     int ndf = OPS_GetNDF();
@@ -369,7 +375,7 @@ void *OPS_ForceBeamColumn3d(const ID &info) {
 
     Element *theEle = new ForceBeamColumn3d(
         iData[0], iData[1], iData[2], secTags.Size(), sections, *bi,
-        *theTransf, mass, maxIter, tol, numSub, subFac);
+        *theTransf, mass, maxIter, tol, numSub, subFac, theDamping);
     delete[] sections;
     return theEle;
 }
