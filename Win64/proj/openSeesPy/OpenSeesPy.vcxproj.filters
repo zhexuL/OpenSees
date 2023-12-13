@@ -67,6 +67,9 @@
     <ClCompile Include="..\..\..\SRC\interpreter\PythonStream.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\SRC\interpreter\OpenSeesdampingCommands.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\SRC\classTags.h">
